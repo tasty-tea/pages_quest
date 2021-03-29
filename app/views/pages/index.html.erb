@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pages</h1>
+
+<% if @root %>
+  <%= @root.generate_tree.html_safe%>
+<% else %>
+  Create Root to continue!
+<% end %>
+<br>
+
+<%= link_to 'New Page', '/add' %>

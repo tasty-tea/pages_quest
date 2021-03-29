@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<%= @page.generate_tree.html_safe %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @page.name %>
+</p>
+
+<p>
+  <strong>Head:</strong>
+  <%= @page.head %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @page.body %>
+</p>
+
+<%= link_to 'Add', "/#{@page.path}/add" %> |
+<%= link_to 'Edit', "/#{@page.path}/edit" %> |
+<%= link_to 'Back', '/' %>
