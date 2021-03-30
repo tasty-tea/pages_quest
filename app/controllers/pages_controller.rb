@@ -19,6 +19,7 @@ class PagesController < ApplicationController
 
   # GET /pages/1/edit
   def edit
+    @page.body = deconstruct_html(@page.body)
   end
 
   # POST /pages or /pages.json
@@ -26,6 +27,7 @@ class PagesController < ApplicationController
     @page = Page.new(page_params)
     @page.parent = @parent
     @page.nesting = @parent.nesting + 1
+    @page.body = construct_html(page_params[:body])
 
     # Create root pages with this condition
     if @parent == @root
@@ -46,7 +48,10 @@ class PagesController < ApplicationController
   # PATCH/PUT /pages/1 or /pages/1.json
   def update
     respond_to do |format|
-      if @page.update(page_params)
+      @page.name = page_params[:name]
+      @page.head = page_params[:head]
+      @page.body = construct_html(page_params[:body])
+      if @page.save
         format.html { redirect_to "/#{@page.path}", notice: "Page was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
