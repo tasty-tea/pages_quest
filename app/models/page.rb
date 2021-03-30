@@ -4,7 +4,8 @@ class Page < ApplicationRecord
 
 	alias_attribute :parent, :page
 
-	validates :name, presence: true, format: { with: /\A[A-Za-zА-Яа-я_\d]*/x }
+	validates :name, presence: true
+	validates_format_of :name, :with => /\A[A-Za-zА-Яа-я_\d]*\Z/i
 
 	def childs
 		Page.where(page_id: id)
