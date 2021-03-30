@@ -11,6 +11,11 @@ class Page < ApplicationRecord
 
   before_create :iterate_nesting
 
+  def self.generate_root
+    root = Page.find_by nesting: 0
+    root ||= Page.create({ name: 'root', head: '0', body: 'text 0', path: '', nesting: 0, page_id: nil })
+  end
+
   def childs
     Page.where(page_id: id)
   end
@@ -36,6 +41,6 @@ class Page < ApplicationRecord
   private
 
   def iterate_nesting
-    self.nesting = parent.nesting + 1
+    self.nesting = parent ? parent.nesting + 1 : 0
   end
 end

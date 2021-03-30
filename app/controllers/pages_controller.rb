@@ -47,6 +47,7 @@ class PagesController < ApplicationController
   def update
     respond_to do |format|
       @page.assign_attributes(page_params)
+      @page.path = update_path(@page.path, page_params[:name])
       @page.body = construct_html(page_params[:body])
       if @page.save
         format.html { redirect_to "/#{@page.path}", notice: 'Page was successfully updated.' }
@@ -68,6 +69,8 @@ class PagesController < ApplicationController
 
   def set_root
     @root = Page.find_by nesting: 0
+    @root ||= generate_root
+    @root
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -87,12 +90,20 @@ class PagesController < ApplicationController
     end
   end
 
+  def update_path(path, name)
+    path.split('/')[1..-1].unshift(name).join('/')
+  end
+
   def generate_path
     if @parent == @root
       @page.name
     else
       @parent.path + '/' + @page.name
     end
+  end
+
+  def generate_root
+    Page.generate_root
   end
 
   # Only allow a list of trusted parameters through.
