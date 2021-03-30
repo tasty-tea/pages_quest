@@ -13,7 +13,7 @@ class Page < ApplicationRecord
 
   def self.generate_root
     root = Page.find_by nesting: 0
-    root ||= Page.create({ name: 'root', head: '0', body: 'text 0', path: '', nesting: 0, page_id: nil })
+    root || Page.create({ name: 'root', head: '0', body: 'text 0', path: '', nesting: 0, page_id: nil })
   end
 
   def childs
