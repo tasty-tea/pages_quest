@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class PagesControllerTest < ActionDispatch::IntegrationTest
@@ -5,17 +7,17 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     @page = pages(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get pages_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_page_url
     assert_response :success
   end
 
-  test "should create page" do
+  test 'should create page' do
     assert_difference('Page.count') do
       post pages_url, params: { page: { body: @page.body, head: @page.head, name: @page.name, nesting: @page.nesting, page_id: @page.page_id, path: @page.path } }
     end
@@ -23,22 +25,22 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to page_url(Page.last)
   end
 
-  test "should show page" do
+  test 'should show page' do
     get page_url(@page)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_page_url(@page)
     assert_response :success
   end
 
-  test "should update page" do
+  test 'should update page' do
     patch page_url(@page), params: { page: { body: @page.body, head: @page.head, name: @page.name, nesting: @page.nesting, page_id: @page.page_id, path: @page.path } }
     assert_redirected_to page_url(@page)
   end
 
-  test "should destroy page" do
+  test 'should destroy page' do
     assert_difference('Page.count', -1) do
       delete page_url(@page)
     end

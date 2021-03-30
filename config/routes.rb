@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   # Have no idea how to add infinite routes with resource policies
   # Root routes
@@ -15,7 +17,6 @@ Rails.application.routes.draw do
   post '/*page_path', to: 'pages#create'
   patch '/*page_path', to: 'pages#update'
   delete '/*page_path', to: 'pages#destroy'
-
 
   # resources :pages
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

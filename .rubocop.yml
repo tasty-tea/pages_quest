@@ -9,10 +9,17 @@ AllCops:
     - 'script/**/*'
     - 'bin/**/*'
 
+Metrics/AbcSize:
+  Max: 20
+
 Metrics/LineLength:
-  Max: 100
+  Max: 180
+
+Metrics/MethodLength:
+  Max: 20
 
 Metrics/BlockLength:
+  Max: 20
   Exclude:
     - config/**/*
     - spec/**/*
